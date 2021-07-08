@@ -6,12 +6,26 @@ namespace DecisionMaking
     {
         static void Main(string[] args)
         {
-            string name = "";
+            //string name = "";
             bool runProgam = true;
 
             Console.WriteLine("Welcome to the Number Decision Maker!");
+
             Console.WriteLine("Please enter your name: ");
-            name = Console.ReadLine();
+            var name = Console.ReadLine();
+
+            var isNumber = int.TryParse(name, out var number);
+            
+            while (string.IsNullOrEmpty(name) || isNumber)
+            {
+                Console.WriteLine("Name can not be empty! Input your name once more");
+                Console.WriteLine("Name cannot be a number");
+                name = Console.ReadLine();
+            }
+            if (!char.IsLetter(e.KeyChar) && (!char.IsControl(e.KeyChar)) && (!char.IsWhiteSpace(e.KeyChar)))
+            {
+                e.Handled = true;
+            }
 
             do
             {
@@ -26,11 +40,11 @@ namespace DecisionMaking
                 {
                     Console.WriteLine($"Even. {name}");
                 }
-                else if ((num % 2 == 0) && (num < 60))
+                else if ((num % 2 == 0) && (num > 60))
                 {
                     Console.WriteLine($"{num} is an even number, {name}.");
                 }
-                else if (num >= 1 || num <= 100)
+                else if ((num < 1 || num > 100))
                 {
                     Console.WriteLine($"{num} is not between 1 - 100, please try again.");
                 }
@@ -60,6 +74,12 @@ namespace DecisionMaking
                     }
                 }
             } while (runProgam);
+        }
+
+        private class e
+        {
+            public static char KeyChar { get; internal set; }
+            public static bool Handled { get; internal set; }
         }
     }
 }
